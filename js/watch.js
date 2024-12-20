@@ -127,4 +127,5 @@ document.addEventListener('click', function (e) {
         e.stopPropagation();
         console.log('Intento de clic en iframe bloqueado.');
     }
+    
 }, true);
