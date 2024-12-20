@@ -1,76 +1,3 @@
-// Función para llamar a la función en api-animeflv.js
-async function llamarApiAnimeflv(anime, episode) {
-    // Asegurarse de que la función buscarAnimeEnApi esté disponible
-    if (typeof obtenerDatos === 'function') {
-        
-        var resultado = await obtenerDatos(anime, "watch", episode);
-
-        var contenedorOpciones = document.querySelector('div.botonera'); 
-        contenedorOpciones.innerHTML = "";
-
-        if (resultado && resultado.opciones) {
-
-            // TITULO
-            const titulo = document.querySelector('h1.text-white');
-            titulo.innerHTML = resultado.titulo;
-
-            // EPISODIO
-            const episodio = document.querySelector('h2.text-gray');
-            episodio.innerHTML = resultado.episodio;
-            
-            // OPCIONES
-            resultado.opciones.forEach((opcion, index) => {
-                const btn = document.createElement('btn');
-                btn.setAttribute('type', 'button'); 
-                btn.setAttribute('onclick', `loadIframe('` + opcion.code + `')`); 
-                btn.classList.add('btn','btn-dark', 'btn-sm');
-                btn.innerHTML = opcion.title;
-                
-                if (index == 0) {
-                    document.getElementById('videoIframe').setAttribute('src', opcion.code);
-                }
-
-                contenedorOpciones.appendChild(btn); 
-            });
-
-
-            // PAGINACION
-            var btnAnterior = document.querySelector('a.anterior');
-            if (resultado.pagAnterior) {
-                btnAnterior.setAttribute('href', 'watch.html?a=' + anime + '&e=' + (parseInt(episode, 10)-1)); 
-            } else {
-                btnAnterior.classList.add("d-none");
-            }
-            var btnSiguiente = document.querySelector('a.siguiente');
-            if (resultado.pagSiguiente) {
-                btnSiguiente.setAttribute('href', 'watch.html?a=' + anime + '&e=' + (parseInt(episode, 10)+1)); 
-            } else {
-                btnSiguiente.classList.add("d-none");
-            }
-            var btnLista = document.querySelector('a.lista');
-            btnLista.setAttribute('href', 'anime.html?a=' + anime); 
-            
-        } else {
-            console.error('No se encontró data');
-        }
-
-        // TERMINAR CON EL LOADING
-        // Buscar el elemento con la clase "loading"
-        let loadingRow = document.querySelector("div.row.loading");
-        // Verificar si el elemento existe y ocultarlo
-        if (loadingRow) {
-            document.querySelectorAll(".container div.row").forEach((div) => {
-                div.classList.remove("d-none");
-            });
-            loadingRow.classList.add("d-none");
-        }
-
-
-    } else {
-        console.error('La función obtenerDatos no está definida en api-animeflv.js');
-    }
-}
-
 function loadIframe(url) {
     document.getElementById('videoIframe').src = url;
 }
@@ -79,8 +6,6 @@ async function getEpisodeJSON(slug, episode) {
     // URL del endpoint que devuelve un JSON
     const urla = "https://animeflv.ahmedrangel.com/api/anime/";
     const urle = "/episode/";
-
-    console.log("Buscando episodio: " + episode);
 
     try {
         const response = await fetch(urla + slug + urle + episode); // Espera la respuesta de la solicitud
@@ -194,3 +119,12 @@ window.onload = function() {
         cargarEpisodio(slug, episode);
     }
 };
+
+document.addEventListener('click', function (e) {
+    // Evita clics que intenten abrir nuevas ventanas
+    if (e.target.tagName === 'IFRAME') {
+        e.preventDefault();
+        e.stopPropagation();
+        console.log('Intento de clic en iframe bloqueado.');
+    }
+}, true);
