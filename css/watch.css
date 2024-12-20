@@ -1,0 +1,62 @@
+.botonera .btn {
+    margin-right: 5px;
+    margin-bottom: 5px;
+}
+
+.video-container {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 */
+    padding-top: 25px;
+    height: 0;
+}
+
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.nav-tabs {
+    border-bottom: none;
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.nav-tabs .nav-link {
+    color: #ffffff;
+    background-color: #333333;
+    border: 1px solid #555;
+    border-radius: 0; /* Diseño cuadrado */
+    text-align: center;
+    padding: 0.5rem 1rem;
+}
+
+.nav-tabs .nav-link.active {
+    background-color: #444444;
+    color: #ffffff;
+}
+
+.nav-tabs .nav-link:focus {
+    box-shadow: none;
+}
+
+.text-gray {
+    color: #aaaaaa;
+}
+
+@media (max-width: 767px) {
+    .nav-tabs .nav-link {
+        padding: 0.5rem 0.75rem;
+        font-size: 1rem;
+    }
+
+    .nav-tabs .nav-link span {
+        display: none;
+    }
+
+    .nav-tabs .nav-link::after {
+        content: attr(data-index);
+    }
+}

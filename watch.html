@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AnimeFLV</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="css/browse.css" rel="stylesheet">
+    <link href="css/watch.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Barra superior -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <a href="index.html"><img src="https://www3.animeflv.net/assets/animeflv/img/logo.png" alt="Logo" class="logo"></a>
+            </a>
+            <form class="d-flex ms-auto" id="searchForm" action="browse.html" method="get">
+                <input class="form-control search-input" type="text" name="q" id="searchInput" placeholder="Buscar..." required>
+                <button class="btn btn-search" type="submit">
+                    <i class="fas fa-search"></i>
+                </button>
+            </form>
+        </div>
+    </nav>
+
+    <!-- Contenido principal -->
+    <div class="container mt-4">
+        <div class="row loading">
+            <div class="col-md-12 loading-container">
+                <img src="images/loading.gif" alt="Cargando...">
+            </div>
+        </div>
+
+        <div class="row d-none">
+            <div class="col-12">
+                <h1 class="text-white"> </h1>
+                <h2 class="text-gray"> </h2>
+            </div>
+        </div>
+        <div class="row mt-3 d-none">
+            <div class="col-12">
+                <div class="botonera" role="group" aria-label="Servidores">
+                    <button type="button" class="btn btn-primary btn-sm" onclick="loadIframe('#')">Opción 1 <i class="fas fa-ad"></i></button>
+                </div>
+                <div class="video-container mt-3">
+                    <iframe id="videoIframe" src="" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-3 d-none">
+            <div class="col-12 d-flex justify-content-start">
+                <a class="btn btn-primary me-2 btn-sm anterior d-none" href="#">
+                    <i class="fas fa-chevron-left"></i> ANTERIOR
+                </a>
+                <a class="btn btn-primary me-2 btn-sm lista" href="#">
+                    <i class="fas fa-list"></i>
+                </a>
+                <a class="btn btn-primary btn-sm siguiente d-none" href="#">
+                    SIGUIENTE <i class="fas fa-chevron-right"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/watch.js"></script>
+</body>
+</html>
